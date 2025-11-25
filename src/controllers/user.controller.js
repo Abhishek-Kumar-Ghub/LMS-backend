@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import user from '../models/user.js';
+import User from '../models/user.js';
 
 const signup=async(req,res)=>{
     try{
@@ -25,7 +25,7 @@ const signup=async(req,res)=>{
 const login=async(req,res)=>{
     try{
         const {email,password}=req.body;
-        const User=await user.findOne({email});
+        const user=await User.findOne({email});
         if(!User){
             return res.status(400).json({message:"Invalid credentials"});
         }

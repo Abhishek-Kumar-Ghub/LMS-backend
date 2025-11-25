@@ -1,29 +1,26 @@
 import mongoose from "mongoose";
-const enrollmentSchema=new mongoose.Schema({
-    user:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'user',
+
+const enrollmentSchema= new mongoose.Schema({
+    student:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required:true,
     },
     course:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'course',
+        ref:'Course',
         required:true,
     },
-    progress:{
+    paidAmount:{
         type:Number,
-        default:0,
+        required:true,
     },
-    completedLessons:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:'lesson',
-        }
-    ],
-    enrolledAt:{
-        type:Date,
-        default:Date.now,
-    }
-},{timestamps:true});
+    paymentStatus:{
+        type:String,
+        enum:['pending','completed','failed'],
+        required:true,
+    },
+},{timestamps:true})
 
-export default mongoose.model('enrollment',enrollmentSchema);
+const Enrollment= mongoose.model("Enrollment",enrollmentSchema);
+export default Enrollment;

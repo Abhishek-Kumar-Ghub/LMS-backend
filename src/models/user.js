@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { ROLES } from '../constants/roles.js';
 
 const userSchema=new mongoose.Schema({
 name:{
@@ -16,12 +17,13 @@ password:{
 },
 role:{
     type:String,
-    enum:['student','instructor','admin'],
-    default:'student',
+    enum:Object.values(ROLES),
+    default: ROLES.STUDENT,
 },
 createdAt:{
     type:Date,
     default:Date.now,
 }
 },{timestamps:true});
-export default mongoose.model('user',userSchema);
+const User= mongoose.model('User',userSchema);
+export default User;
