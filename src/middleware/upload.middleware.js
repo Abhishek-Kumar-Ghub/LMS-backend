@@ -16,4 +16,11 @@ const upload = multer({
     limits: { fileSize: 100 * 1024 * 1024 } // 100MB limit
 });
 
+const videoUpload = upload.fields([
+    { name: 'video', maxCount: 1 },
+    { name: 'videoFile', maxCount: 1 },
+    { name: 'file', maxCount: 1 }
+]);
+
+export { upload, videoUpload };
 export default upload;

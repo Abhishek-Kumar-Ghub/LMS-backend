@@ -20,7 +20,7 @@ const addCourse = async (req, res) => {
 
 const getCourses = async (req, res) => {
     try {
-        const courses = await Course.find().populate("instructor", "name").sort({ createdAt: -1 });
+        const courses = await Course.find().populate("instructor", "name")
         res.status(200).json({ message: "Courses fetched", courses });
     } catch (error) {
         res.status(500).json({ message: error.message });

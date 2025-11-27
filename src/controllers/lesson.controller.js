@@ -9,8 +9,9 @@ const uploadVideo = async (req, res) => {
         }
 
         const { courseId, title, content, order } = req.body;
+        const videoFile = req.files?.video?.[0] || req.files?.videoFile?.[0] || req.files?.file?.[0];
         
-        if (!req.file) {
+        if (!videoFile) {
             return res.status(400).json({ message: 'Video file is required' });
         }
 
@@ -20,8 +21,8 @@ const uploadVideo = async (req, res) => {
         }
 
         const uploadResponse = await imagekit.upload({
-            file: req.file.buffer,
-            fileName: `${courseId}_${title}_${Date.now()}.mp4`,
+            file: videoFile.buffer,
+            fileName: `${courseId}_${title}_${Date.now()}.${videoFile.originalname.split('.').pop()}`,
             folder: `/courses/${courseId}/lessons`
         });
 
@@ -29,6 +30,11 @@ const uploadVideo = async (req, res) => {
             course: courseId,
             title,
             videoUrl: uploadResponse.url,
+            videoFile: {
+                name: videoFile.originalname,
+                size: videoFile.size,
+                mimetype: videoFile.mimetype
+            },
             content,
             order
         });
@@ -65,6 +71,7 @@ const streamLesson = async (req, res) => {
                 title: lesson.title,
                 content: lesson.content,
                 videoUrl,
+                videoFile: lesson.videoFile,
                 course: lesson.course.title
             }
         });

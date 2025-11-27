@@ -8,8 +8,6 @@ const courseSchema= new mongoose.Schema({
     },
     subtitle:{
         type:String,
-      
-       
     },
     description:{
         type:String,
@@ -23,12 +21,10 @@ const courseSchema= new mongoose.Schema({
     },
     price:{
      type:Number,
-     
     },
     category:{
         type:String,
         required:true,
-      
     },
     level:{
         type:String,
@@ -37,7 +33,6 @@ const courseSchema= new mongoose.Schema({
     },
     thumbnailUrl:{
         type:String,
-        
     },
     published:{
         type:Boolean,
