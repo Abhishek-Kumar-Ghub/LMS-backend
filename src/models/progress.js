@@ -1,35 +1,25 @@
 import mongoose from "mongoose";
-
-const progressSchema=new mongoose.Schema({
-    user:{
+const progressSchema= new mongoose.Schema({
+    student:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'user',
+        ref:'User',
         required:true,
     },
     course:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'course',
+        ref:'Course',
         required:true,
     },
-    lesson:{
+    completedLessons: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Lesson'
+    }],
+    lastLesson:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'lesson',
-        required:true,
+        ref:'Lesson'
     },
-    status:{
-        type:String,
-        enum:['not started','in progress','completed'],
-        default:'not started',
-    },
-    watchedDuration:{
-        type:Number,
-        default:0,
-    },
-    updatedAt:{
-        type:Date,
-        default:Date.now,
-    }
+    
+},{timestamps:true})
 
-},{timestamps:true});
-
-export default mongoose.model('progress',progressSchema);
+const Progress=mongoose.model("Progress",progressSchema);
+export default Progress;

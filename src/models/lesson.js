@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import course from "./course";
 const lessonSchema=new mongoose.Schema({
 
     course:{
@@ -12,8 +11,8 @@ const lessonSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    VideoUrl:{
-        type:String,
+    videoUrl: {
+        type: String,
     },
     content:{
         type:String,    
