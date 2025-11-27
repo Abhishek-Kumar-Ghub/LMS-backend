@@ -1,12 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import connectionDb from './src/config/database.js';
-import userRouter from './src/routes/user.route.js';
-import courseRouter from './src/routes/course.route.js';
-import lessonRouter from './src/routes/lesson.route.js';
-import enrollmentRouter from './src/routes/enrollment.route.js';
-import progressRouter from './src/routes/progress.route.js';
-import reviewRouter from './src/routes/review.route.js';
+import connectionDb from './config/database.js';
+import userRouter from './routes/user.route.js';
+import courseRouter from './routes/course.route.js';
+import lessonRouter from './routes/lesson.route.js';
+import enrollmentRouter from './routes/enrollment.route.js';
+import progressRouter from './routes/progress.route.js';
+import reviewRouter from './routes/review.route.js';
 
 dotenv.config();
 const app = express();
