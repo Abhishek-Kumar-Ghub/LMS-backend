@@ -5,5 +5,4 @@ import { verifyToken } from '../middleware/auth.middleware.js';
 const router = express.Router();
 
 router.post('/:courseId', verifyToken, addReview);
-
 export default router;

@@ -36,4 +36,29 @@ const addReview = async (req, res) => {
   }
 };
 
-export {addReview}
+const deleteReview = async (req, res) => {
+  try {
+    const { reviewId } = req.params;
+    const review = await Review.findById(reviewId);
+    if (!review) {
+      return res.status(404).json({ message: "Review not found" });
+     }
+
+     if(review.student.toString()!==req.user._id.toString() && req.user.role!=='admin'){
+        return res.status(401).json({message :"Not authorized to delete review"})
+     }
+     const deletedReview = await Review.findByIdAndDelete(reviewId);
+     const stats = await Review.aggregate([
+      { $match: { course: review.course } },
+      { $group: { _id: "$course", avgRating: { $avg: "$rating" } } },
+    ]); 
+    const newAvg = stats.length > 0 ? stats[0].avgRating : 0;
+     res.status(200).json({message:"Review deleted successfully", deletedReview})
+      await Course.findByIdAndUpdate(review.course,{averageRating:newAvg})
+  }catch (error) {  
+    console.log(error.message)
+      return res.status(500).json({message:error.message})
+  }
+}
+
+export {addReview ,deleteReview};

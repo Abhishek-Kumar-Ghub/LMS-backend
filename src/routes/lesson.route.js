@@ -10,4 +10,5 @@ router.post('/upload', verifyToken, authorizedRoles('instructor'), videoUpload, 
 router.get('/stream/:lessonId', verifyToken, streamLesson);
 router.get('/course/:courseId', verifyToken, getLessonsByCourse);
 
+
 export default router;

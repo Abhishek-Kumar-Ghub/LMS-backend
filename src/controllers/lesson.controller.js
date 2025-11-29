@@ -91,4 +91,43 @@ const getLessonsByCourse = async (req, res) => {
     }
 };
 
-export { uploadVideo, streamLesson, getLessonsByCourse };
+const updateLesson = async (req, res) => {
+    try {
+        const { lessonId } = req.params;
+        const {title, order, freePreview, duration}=req.body;
+        const lesson = await Lesson.findById(lessonId).populate('course');
+        if (!lesson) {
+            return res.status(404).json({ message: 'Lesson not found' });
+        }
+        if(lesson.course.instructor.toString()!==req.user._id.toString() && req.user.role!=='admin' ){
+            return res.status(401).json({message :"Not authorized to update lesson"})
+        }
+        const updatedLesson = await Lesson.findByIdAndUpdate(lessonId, {title, order, freePreview, duration}, {new:true})
+        res.status(200).json({ message: 'Lesson updated successfully', updatedLesson });
+
+    }catch (error) {
+        console.log(error.message)
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const deleteLesson = async (req, res) => {
+    try {
+        const { lessonId } = req.params;
+        const lesson = await Lesson.findById(lessonId).populate('course');
+        if (!lesson) {
+            return res.status(404).json({ message: 'Lesson not found' });
+        }
+
+        if(lesson.course.instructor.toString()!==req.user._id.toString() && req.user.role!=='admin' ){
+            return res.status(401).json({message :"Not authorized to delete lesson"})
+        }
+        
+       const deletedLesson = await Lesson.findByIdAndDelete(lessonId);
+        res.status(200).json({ message: 'Lesson deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export { uploadVideo, streamLesson, getLessonsByCourse, updateLesson, deleteLesson };

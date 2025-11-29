@@ -1,35 +1,35 @@
 import mongoose from "mongoose";
-const lessonSchema=new mongoose.Schema({
 
+const lessonSchema=new mongoose.Schema({
     course:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'course',
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Course',
         required:true,
     },
+
     title:{
         type:String,
         required:true,
+        trim:true,
     },
-    videoUrl: {
-        type: String,
-    },
-    videoFile: {
-        name: String,
-        size: Number,
-        mimetype: String
-    },
-    content:{
-        type:String,    
+
+    videoPath:{
+        type:String,
+        required:true,
     },
     order:{
         type:Number,
         required:true,
     },
-    createdAt:{
-        type:Date,
-        default:Date.now,
-    }
+    freePreview:{
+        type:Boolean,
+        default:false,
+    },
+    duration:{
+        type:Number,
+    },
 
-},{timestamps:true});
+},{timestamps:true})
 
-export default mongoose.model('lesson',lessonSchema);
+const Lesson=mongoose.model("Lesson",lessonSchema);
+export default Lesson;
