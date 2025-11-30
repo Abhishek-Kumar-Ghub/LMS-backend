@@ -55,4 +55,59 @@ const login = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
-export { signup, login };
+
+const getProfile = async (req, res) => {
+    try {
+        const user=req.user
+        // if(!user){
+        //     return res.status(404).json({message:"user not found"})
+        // }
+        res.status(200).json({message:"profile fetched", user})
+
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({message:error.message})
+    }
+}
+
+const updateProfile=async (req,res)=>{
+    try {
+        const{name, password}=req.body
+        const userId=req.user._id;
+        const updateData={}
+
+        if(name){
+            updateData.name=name
+        }
+        if(password){
+            const salt =await bcrypt.genSalt(15)
+            const hashedPassword=await bcrypt.hash(password,salt)
+            updateData.password=hashedPassword
+        }
+        const updateProfile=await User.findByIdAndUpdate(userId,updateData,{new:true}).select("-password")
+        res.status(200).json({message:"Profile updated successfully",updateProfile})
+    } catch (error) {
+                console.log(error.message)
+        res.status(500).json({message:error.message})
+    }
+}
+
+const userBlocked=async(req,res)=>{
+try {
+    const {userId}=req.params
+    const updatedUser=await User.findByIdAndUpdate(
+        userId,
+        {isBlocked:true},
+        {new:true}
+    ).select("-password")
+    if(!updatedUser){
+        return res.status(404).json({message:"User not found"});
+    }
+    res.status(200).json({message:"User blocked successfully",updatedUser})
+}
+ catch (error) {
+        console.log(error.message)
+        res.status(500).json({message:error.message})
+}
+}
+export { signup, login ,getProfile , updateProfile , userBlocked};

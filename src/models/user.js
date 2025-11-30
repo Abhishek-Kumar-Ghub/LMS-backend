@@ -23,7 +23,13 @@ role:{
 createdAt:{
     type:Date,
     default:Date.now,
-}
+},
+
+    isBlocked:{
+    type:Boolean,   
+    default:false
+    }
+
 },{timestamps:true});
 const User= mongoose.model('User',userSchema);
 export default User;
