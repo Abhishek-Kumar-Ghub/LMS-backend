@@ -4,6 +4,7 @@ import Review from "../models/review.js";
 import Enrollment from "../models/enrollment.js";
 import Progress from "../models/progress.js";
 
+// adcourse function
 const addCourse = async (req, res) => {
     try {
         const { title, subtitle, description, price, category, level } = req.body;
