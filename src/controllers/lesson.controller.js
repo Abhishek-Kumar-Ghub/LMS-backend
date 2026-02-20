@@ -2,6 +2,7 @@ import Lesson from '../models/lesson.js';
 import Course from '../models/course.js';
 import imagekit from '../config/imagekit.js';
 
+//upload video 
 const uploadVideo = async (req, res) => {
     try {
         if (!imagekit) {
