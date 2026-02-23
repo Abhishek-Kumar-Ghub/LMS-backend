@@ -1,6 +1,7 @@
 import Enrollment from "../models/enrollment.js";
 import Progress from "../models/progress.js";
 
+//markProgress
 const markProgress = async (req, res) => {
     try {
         const { courseId, lessonId } = req.body;
