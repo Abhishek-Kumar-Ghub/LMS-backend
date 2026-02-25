@@ -23,6 +23,7 @@ const addCourse = async (req, res) => {
     }
 };
 
+//getcourse func
 const getCourses = async (req, res) => {
     try {
         const courses = await Course.find().populate("instructor", "name")
