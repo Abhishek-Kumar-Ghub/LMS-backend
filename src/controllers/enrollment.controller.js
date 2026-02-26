@@ -1,6 +1,7 @@
 import Course from "../models/course.js";
 import Enrollment from "../models/enrollment.js";
 
+//enrollcourse
 const enrollCourse = async (req, res) => {
     try {
         const { courseId } = req.body;
