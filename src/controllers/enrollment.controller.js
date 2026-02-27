@@ -9,7 +9,7 @@ const enrollCourse = async (req, res) => {
         if (!course) {
             return res.status(404).json({ message: "Course not found" });
         }
-
+//enrollment 
         const enrollment = await Enrollment.create({
             student: req.user._id,
             course: courseId,
