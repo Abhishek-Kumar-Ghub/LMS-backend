@@ -25,7 +25,7 @@ const enrollCourse = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
+//getmycourse
 const getMyCourses = async (req, res) => {
     try {
         const enrolledCourses = await Enrollment.find({ student: req.user._id })
