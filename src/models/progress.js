@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 const progressSchema= new mongoose.Schema({
-    student:{
+    //students model
+     student:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true,
