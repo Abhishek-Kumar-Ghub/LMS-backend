@@ -2,7 +2,7 @@ import Course from "../models/course.js";
 import Enrollment from "../models/enrollment.js";
 import Review from "../models/review.js";
 
-
+//addReview
 const addReview = async (req, res) => {
   try {
     const { courseId } = req.params;
