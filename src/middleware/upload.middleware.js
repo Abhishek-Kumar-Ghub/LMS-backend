@@ -15,7 +15,7 @@ const upload = multer({
     fileFilter,
     limits: { fileSize: 100 * 1024 * 1024 } // 100MB limit
 });
-
+//video uploads
 const videoUpload = upload.fields([
     { name: 'video', maxCount: 1 },
     { name: 'videoFile', maxCount: 1 },
