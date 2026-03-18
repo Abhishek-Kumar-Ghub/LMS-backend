@@ -6,6 +6,7 @@ const reviewSchema= new mongoose.Schema({
         ref:'Course',
         required:true,
     },
+    //student
     student:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
