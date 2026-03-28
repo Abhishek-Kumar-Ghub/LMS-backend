@@ -6,7 +6,7 @@ const lessonSchema=new mongoose.Schema({
         ref:'Course',
         required:true,
     },
-
+//title
     title:{
         type:String,
         required:true,
