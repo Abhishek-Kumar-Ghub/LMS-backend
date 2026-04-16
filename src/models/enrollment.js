@@ -12,6 +12,7 @@ const enrollmentSchema = new mongoose.Schema({
         ref: 'Course',
         required: true
     },
+    //paidamount
     paidAmount: {
         type: Number,
         required: true
