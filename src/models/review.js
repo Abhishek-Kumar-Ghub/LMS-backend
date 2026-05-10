@@ -24,6 +24,7 @@ const reviewSchema= new mongoose.Schema({
         type:String,
         trim:true,
     }
+    //timestamp
 },{timestamps:true})
 
 const Review= mongoose.model("Review",reviewSchema);
