@@ -13,6 +13,7 @@ const enrollmentSchema = new mongoose.Schema({
         required: true
     },
     //paidamount
+//can be number
     paidAmount: {
         type: Number,
         required: true
