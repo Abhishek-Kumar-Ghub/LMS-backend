@@ -13,6 +13,7 @@ const progressSchema= new mongoose.Schema({
         required:true,
     },
     //completedLessons
+//lessons
     completedLessons: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Lesson'
